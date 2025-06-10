@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Billing - Anisha's Cafe</title>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #c94c4c;
+      font-family: 'Pacifico', cursive;
+    }
+
+    form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #ff7675;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d63031;
+    }
+
+    .result {
+      margin-top: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      width: 100%;
+    }
+
+    .result p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Billing</h1>
+  <form id="billForm">
+    <label>Choose Pizza:
+      <select id="pizza">
+        <option value="0">None</option>
+        <option value="150">OTC - ₹150</option>
+        <option value="100">Margherita - ₹100</option>
+        <option value="250">Peppy Paneer - ₹250</option>
+        <option value="350">Cheesecorn - ₹350</option>
+      </select>
+    </label>
+    <label>Pizza Quantity:
+      <input type="number" id="pizzaQty" min="0" value="0">
+    </label>
+
+    <label>Choose Pasta:
+      <select id="pasta">
+        <option value="0">None</option>
+        <option value="90">Red Sauce - ₹90</option>
+        <option value="120">White Sauce - ₹120</option>
+        <option value="160">Pink Sauce - ₹160</option>
+      </select>
+    </label>
+    <label>Pasta Quantity:
+      <input type="number" id="pastaQty" min="0" value="0">
+    </label>
+
+    <label>Choose Shake:
+      <select id="shake">
+        <option value="0">None</option>
+        <option value="100">Oreo - ₹100</option>
+        <option value="120">KitKat - ₹120</option>
+        <option value="160">Dark Chocolate - ₹160</option>
+      </select>
+    </label>
+    <label>Shake Quantity:
+      <input type="number" id="shakeQty" min="0" value="0">
+    </label>
+
+    <button type="button" onclick="calculateBill()">Generate Bill</button>
+
+    <div class="result" id="billResult"></div>
+  </form>
+
+  <script>
+    function calculateBill() {
+      let pizzaPrice = parseInt(document.getElementById("pizza").value);
+      let pizzaQty = parseInt(document.getElementById("pizzaQty").value);
+
+      let pastaPrice = parseInt(document.getElementById("pasta").value);
+      let pastaQty = parseInt(document.getElementById("pastaQty").value);
+
+      let shakePrice = parseInt(document.getElementById("shake").value);
+      let shakeQty = parseInt(document.getElementById("shakeQty").value);
+
+      let total = (pizzaPrice * pizzaQty) + (pastaPrice * pastaQty) + (shakePrice * shakeQty);
+
+      let billHTML = `
+        <p>🍕 Pizza Total: ₹${pizzaPrice * pizzaQty}</p>
+        <p>🍝 Pasta Total: ₹${pastaPrice * pastaQty}</p>
+        <p>🥤 Shake Total: ₹${shakePrice * shakeQty}</p>
+        <hr>
+        <p><strong>Total Amount: ₹${total}</strong></p>
+      `;
+
+      document.getElementById("billResult").innerHTML = billHTML;
+    }
+  </script>
+</body>
+</html>
